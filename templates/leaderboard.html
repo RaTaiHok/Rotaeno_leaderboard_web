@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotaeno玩家排行榜</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Rotaeno玩家排行榜 <span id="type-display" class="type-display">Rating</span></h1>
+                    <p class="last-updated">
+                        <i class="fas fa-sync-alt"></i> 
+                        <span id="last-updated-text">最后更新: 正在加载...</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="controls">
+            <div class="sort-controls">
+                <div class="section-title">
+                    <i class="fas fa-sort-amount-down"></i>
+                    排序方式
+                </div>
+                <div class="sort-options">
+                    <button class="sort-btn active" data-type="rating">
+                        <i class="fas fa-star"></i> 按Rating排序
+                    </button>
+                    <button class="sort-btn" data-type="score">
+                        <i class="fas fa-trophy"></i> 按总分数排序
+                    </button>
+                    <button class="sort-btn" data-type="acc_score">
+                        <i class="fas fa-bullseye"></i> 按准度平均分排序
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <div class="section-title">
+                    <i class="fas fa-search"></i>
+                    搜索玩家
+                </div>
+                <div class="search-form">
+                    <div class="search-type">
+                        <button class="search-type-btn active" data-type="player">玩家名</button>
+                        <button class="search-type-btn" data-type="rank">排名</button>
+                    </div>
+                    <div class="search-input">
+                        <input type="text" name="search_value" id="search-value" 
+                               placeholder="输入玩家名" list="player-list">
+                        <datalist id="player-list"></datalist>
+                    </div>
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="leaderboard-container">
+            <table>
+                <thead id="leaderboard-header">
+                </thead>
+                <tbody id="leaderboard-body">
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 30px;">
+                            <i class="fas fa-spinner fa-spin"></i> 正在加载排行榜数据...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination" id="pagination">
+        </div>
+        
+        <div class="footer-info">
+            数据每1小时自动更新 | Rotaeno玩家排行榜 v1.0<br>Made by RTHsama | Powered by Flask & PostgreSQL
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
