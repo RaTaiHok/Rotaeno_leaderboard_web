@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotaeno玩家排行榜</title>
+    <link rel="shortcut icon" href="/static/img/app_icon.png" type="image/png">
+    <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dark.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -14,15 +19,43 @@
                 <div>
                     <h1>Rotaeno玩家排行榜 <span id="type-display" class="type-display">Rating</span></h1>
                     <p class="last-updated">
-                        <i class="fas fa-sync-alt"></i> 
+                        <i class="fas fa-sync-alt"></i>
                         <span id="last-updated-text">最后更新: 正在加载...</span>
                     </p>
+                    <p class="last-updated">数据来源Suzuneko铃猫酱Bot</p>
                 </div>
             </div>
         </div>
     </header>
-    
+
     <div class="container">
+        <button id="backToTop">
+            <svg t="1755341653997" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="2364">
+                <path
+                    d="M800 192 224 192c-17.7 0-32 14.3-32 32s14.3 32 32 32l576 0c17.7 0 32-14.3 32-32S817.7 192 800 192z"
+                    p-id="2365" fill="#ffffff"></path>
+                <path
+                    d="M534.7 297.4c-3-3-6.5-5.3-10.4-7-7.8-3.2-16.6-3.2-24.4 0-3.9 1.6-7.5 4-10.4 7l-256 256c-12.5 12.5-12.5 32.8 0 45.2s32.8 12.5 45.2 0L480 397.2 480 832c0 17.7 14.3 32 32 32s32-14.3 32-32L544 397.2l201.4 201.4c6.2 6.2 14.4 9.4 22.6 9.4s16.4-3.1 22.6-9.4c12.5-12.5 12.5-32.8 0-45.2L534.7 297.4z"
+                    p-id="2366" fill="#ffffff"></path>
+            </svg>
+        </button>
+        <label for="theme-toggle" id="theme-change">
+            <svg t="1755312075667" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="669" id="light">
+                <path
+                    d="M900.8 432.96a137.92 137.92 0 0 1-58.24-140.16c14.72-76.16 27.52-101.12 8.64-120.32s-43.84-6.08-120.32 8.64a137.92 137.92 0 0 1-140.16-58.24C547.52 58.88 538.88 32 512 32s-35.52 26.88-79.04 91.2a137.92 137.92 0 0 1-140.16 57.92C216.64 166.4 192 153.6 172.48 172.48s-6.08 43.84 8.64 120.32a137.92 137.92 0 0 1-58.24 140.16C58.88 476.48 32 485.12 32 512s26.88 35.52 91.2 79.04a137.92 137.92 0 0 1 57.92 140.16c-14.72 76.16-27.52 100.8-8.64 120.32s43.84 6.08 120.32-8.64a137.92 137.92 0 0 1 140.16 58.24c43.52 64 52.16 90.88 79.04 90.88s35.52-26.88 79.04-90.88a137.92 137.92 0 0 1 140.16-58.24c76.16 14.72 101.12 27.52 120.32 8.64s6.08-43.84-8.64-120.32a137.92 137.92 0 0 1 57.92-140.16C965.12 547.52 992 538.88 992 512s-26.88-35.52-91.2-79.04zM512 752a240 240 0 1 1 240-240 240 240 0 0 1-240 240zM512 352a160 160 0 1 0 160 160 160 160 0 0 0-160-160z"
+                    fill="#ffffff" p-id="670"></path>
+            </svg>
+            <svg t="1755312123748" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="1149" id="dark">
+                <path
+                    d="M524.8 938.666667h-4.266667a439.893333 439.893333 0 0 1-313.173333-134.4 446.293333 446.293333 0 0 1-11.093333-597.333334 432.213333 432.213333 0 0 1 170.666666-116.906666 42.666667 42.666667 0 0 1 45.226667 9.386666 42.666667 42.666667 0 0 1 10.24 42.666667 358.4 358.4 0 0 0 82.773333 375.893333 361.386667 361.386667 0 0 0 376.746667 82.773334 42.666667 42.666667 0 0 1 54.186667 55.04A433.493333 433.493333 0 0 1 836.266667 810.666667a438.613333 438.613333 0 0 1-311.466667 128z"
+                    p-id="1150" fill="#ffffff"></path>
+            </svg>
+        </label>
+        <input type="checkbox" id="theme-toggle" hidden>
+
         <div class="controls">
             <div class="sort-controls">
                 <div class="section-title">
@@ -31,17 +64,17 @@
                 </div>
                 <div class="sort-options">
                     <button class="sort-btn active" data-type="rating">
-                        <i class="fas fa-star"></i> 按Rating排序
+                        <i class="fas fa-star"></i> Rating
                     </button>
                     <button class="sort-btn" data-type="score">
-                        <i class="fas fa-trophy"></i> 按总分数排序
+                        <i class="fas fa-trophy"></i> 总分数
                     </button>
                     <button class="sort-btn" data-type="acc_score">
-                        <i class="fas fa-bullseye"></i> 按准度平均分排序
+                        <i class="fas fa-bullseye"></i> 准度平均分
                     </button>
                 </div>
             </div>
-            
+
             <div class="search-container">
                 <div class="section-title">
                     <i class="fas fa-search"></i>
@@ -53,9 +86,7 @@
                         <button class="search-type-btn" data-type="rank">排名</button>
                     </div>
                     <div class="search-input">
-                        <input type="text" name="search_value" id="search-value" 
-                               placeholder="输入玩家名" list="player-list">
-                        <datalist id="player-list"></datalist>
+                        <input type="text" name="search_value" id="search-value" placeholder="输入玩家名" list="player-list">
                     </div>
                     <button class="search-btn" id="search-btn">
                         <i class="fas fa-search"></i> 搜索
@@ -63,33 +94,86 @@
                 </div>
             </div>
         </div>
-        
-        <div class="leaderboard-container">
+
+        <div class="set_leaderborad_size">
+            <button class="set_size">切换至页面视图</button>
+        </div>
+
+        <div class="leaderboard_container" data-simplebar>
             <table>
                 <thead id="leaderboard-header">
                 </thead>
                 <tbody id="leaderboard-body">
                     <tr>
-                        <td colspan="8" style="text-align: center; padding: 30px;">
+                        <td colspan="8" id="loading_leaderborad">
                             <i class="fas fa-spinner fa-spin"></i> 正在加载排行榜数据...
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
+
         <div class="pagination" id="pagination">
         </div>
-        
-        <div class="footer-info">
-            数据每1小时自动更新 | Rotaeno玩家排行榜 v1.0<br>Made by RTHsama | Powered by Flask & PostgreSQL
-        </div>
+
+
     </div>
-    
+    <div class="footer-info">
+        <p>数据每1小时自动更新 | Rotaeno玩家排行榜 v1.2.0<br>Made by RTHsama | UI Designed by Sixi<br>Powered by Flask & PostgreSQL</p>
+        <p id="bilibili-link" class="related-link">
+            B站个人主页：
+            <a href="https://space.bilibili.com/436809171">
+                <svg t="1755357631760" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="7318" width="16" height="16">
+                    <path
+                        d="M800 224h-51.2l44.8-44.8c19.2-19.2 19.2-57.6 0-76.8s-57.6-19.2-76.8 0l-128 121.6h-153.6l-128-121.6c-19.2-19.2-57.6-19.2-76.8 0s-19.2 57.6 0 76.8L275.2 224H224c-89.6 0-160 70.4-160 160v345.6c0 96 70.4 166.4 160 166.4h569.6c89.6 0 160-70.4 160-160V384c6.4-89.6-64-160-153.6-160z m44.8 505.6c0 32-25.6 57.6-57.6 57.6H230.4c-32 0-57.6-25.6-57.6-57.6V390.4c0-32 25.6-57.6 57.6-57.6h556.8c32 0 57.6 25.6 57.6 57.6v339.2zM345.6 448c-32 0-57.6 25.6-57.6 57.6v57.6c0 32 25.6 57.6 57.6 57.6s57.6-25.6 57.6-57.6v-57.6c0-32-25.6-57.6-57.6-57.6z m332.8 0c-32 0-57.6 25.6-57.6 57.6v57.6c0 32 25.6 57.6 57.6 57.6s57.6-25.6 57.6-57.6v-57.6c0-32-25.6-57.6-57.6-57.6z"
+                        p-id="7319" fill="#ffffff"></path>
+                </svg> RTHsama
+            </a> |
+            <a href="https://space.bilibili.com/518645556">
+                <svg t="1755357631760" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="7318" width="16" height="16">
+                    <path
+                        d="M800 224h-51.2l44.8-44.8c19.2-19.2 19.2-57.6 0-76.8s-57.6-19.2-76.8 0l-128 121.6h-153.6l-128-121.6c-19.2-19.2-57.6-19.2-76.8 0s-19.2 57.6 0 76.8L275.2 224H224c-89.6 0-160 70.4-160 160v345.6c0 96 70.4 166.4 160 166.4h569.6c89.6 0 160-70.4 160-160V384c6.4-89.6-64-160-153.6-160z m44.8 505.6c0 32-25.6 57.6-57.6 57.6H230.4c-32 0-57.6-25.6-57.6-57.6V390.4c0-32 25.6-57.6 57.6-57.6h556.8c32 0 57.6 25.6 57.6 57.6v339.2zM345.6 448c-32 0-57.6 25.6-57.6 57.6v57.6c0 32 25.6 57.6 57.6 57.6s57.6-25.6 57.6-57.6v-57.6c0-32-25.6-57.6-57.6-57.6z m332.8 0c-32 0-57.6 25.6-57.6 57.6v57.6c0 32 25.6 57.6 57.6 57.6s57.6-25.6 57.6-57.6v-57.6c0-32-25.6-57.6-57.6-57.6z"
+                        p-id="7319" fill="#ffffff"></path>
+                </svg> Sixi
+            </a>
+        </p>
+        <p id="qq-group-link" class="related-link">
+            <span>铃猫酱官方群聊</span><br>
+            <a href="https://qm.qq.com/q/9WrVrgGy08">
+                <svg t="1755357806095" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="10977" width="16" height="16">
+                    <path
+                        d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z"
+                        p-id="10978" fill="#ffffff"></path>
+                </svg>759274507(1群)
+            </a> |
+            <a href="https://qm.qq.com/q/TTwQQhr4ci">
+                <svg t="1755357806095" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="10977" width="16" height="16">
+                    <path
+                        d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z"
+                        p-id="10978" fill="#ffffff"></path>
+                </svg>754192668(2群)
+            </a> |
+            <a href="https://qm.qq.com/q/XEOwmRj42W">
+                <svg t="1755357806095" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="10977" width="16" height="16">
+                    <path
+                        d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z"
+                        p-id="10978" fill="#ffffff"></path>
+                </svg>1011028553(3群)
+            </a>
+        </p>
+    </div>
+
     <div class="loading-overlay" id="loading-overlay">
         <div class="spinner"></div>
     </div>
-    
+
     <script src="/static/script.js"></script>
+    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 </body>
+
 </html>
