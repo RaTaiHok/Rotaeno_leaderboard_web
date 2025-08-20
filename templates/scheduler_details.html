@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scheduler Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; table-layout: fixed; }
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: left; word-wrap: break-word; }
+        th { background-color: #f5f5f5; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .paused { color: red; font-weight: bold; }
+        .running { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Scheduler Detailed Status</h1>
+    <table id="scheduler-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Next Run</th>
+                <th>Trigger</th>
+                <th>Paused</th>
+                <th>Last Run</th>
+                <th>Duration (s)</th>
+                <th>Args</th>
+                <th>Kwargs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="9">Loading...</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        async function loadSchedulerDetails() {
+            try {
+                const response = await fetch('/api/scheduler/details');
+                const data = await response.json();
+
+                const tbody = document.querySelector('#scheduler-table tbody');
+                tbody.innerHTML = '';
+
+                if (data.status === 'success' && data.jobs.length > 0) {
+                    data.jobs.forEach(job => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${job.id}</td>
+                            <td>${job.name}</td>
+                            <td>${job.next_run_time || '-'}</td>
+                            <td>${job.trigger || '-'}</td>
+                            <td class="${job.paused ? 'paused' : 'running'}">${job.paused ? 'Yes' : 'No'}</td>
+                            <td>${job.last_run_time || '-'}</td>
+                            <td>${job.last_duration || '-'}</td>
+                            <td>${JSON.stringify(job.args)}</td>
+                            <td>${JSON.stringify(job.kwargs)}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="9">No jobs found</td></tr>`;
+                }
+            } catch (err) {
+                console.error('Error fetching scheduler details:', err);
+                const tbody = document.querySelector('#scheduler-table tbody');
+                tbody.innerHTML = `<tr><td colspan="9">Error loading data</td></tr>`;
+            }
+        }
+
+        // 页面加载完成后立即请求一次
+        window.onload = loadSchedulerDetails;
+
+        // 每5秒自动刷新一次，实现实时效果
+        setInterval(loadSchedulerDetails, 5000);
+    </script>
+</body>
+</html>
