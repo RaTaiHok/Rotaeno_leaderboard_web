@@ -3,12 +3,24 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 数据结构
 
+> Rating / Total Score / Acc Score
+
 - Rank
 - Player Name
 - Rating
 - Level
 - Total Score
 - Acc Score
+- Played Time
+- Server
+
+> Song Score
+
+- Rank
+- Player Name
+- Song Score
+- Rating 
+- Level
 - Played Time
 - Server
 
