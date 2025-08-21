@@ -36,6 +36,12 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 1.5.2
+
+页脚新增了网页访问次数统计 —— 小彩蛋
+
+---
+
 v 1.5.1
 
 修复了歌曲排行榜中搜索玩家后的分页显示问题
