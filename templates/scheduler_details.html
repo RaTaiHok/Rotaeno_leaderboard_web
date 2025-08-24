@@ -70,10 +70,7 @@
             }
         }
 
-        // 页面加载完成后立即请求一次
         window.onload = loadSchedulerDetails;
-
-        // 每5秒自动刷新一次，实现实时效果
         setInterval(loadSchedulerDetails, 5000);
     </script>
 </body>
