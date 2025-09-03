@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用声明 - Rotaeno排行榜</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}" id="theme-style">
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <h1 class="modal-title">使用声明</h1>
+            <div class="modal-content">
+                <p>欢迎使用 Rotaeno 排行榜网站！在开始使用之前，请仔细阅读以下声明：</p>
+                <ol>
+                    <li>本网站仅用于展示 Rotaeno 游戏的玩家成绩数据。</li>
+                    <li>所有数据来源于玩家自愿提供，我们不对数据的准确性负责。</li>
+                    <li>我们承诺合理使用您的数据，仅用于排行榜展示目的。</li>
+                    <li>使用本网站即表示您同意我们的使用条款和隐私政策。</li>
+                </ol>
+                <p class="section-title">重要提示：</p>
+                <ol>
+                    <li>如需使用 bot 上传分数，请滑到页面最下方获取入口。</li>
+                    <li>请勿将此页面的内容发布到 Rotaeno 官方群聊（驾校）和 Discord 群组中。</li>
+                    <li>希望大家低调宣传内推。</li>
+                    <li>欢迎对 bot 和网页积极提出意见和建议。</li>
+                    <li>祝大家推分愉快！</li>
+                </ol>
+            </div>
+            <div class="modal-buttons" id="noticeButtons">
+                {%- if from_page != 'leaderboard' -%}
+                <button id="disagreeBtn" class="modal-button disagree">拒绝</button>
+                <button id="agreeBtn" class="modal-button agree" disabled>请等待 <span id="timer">10</span> 秒</button>
+                {%- else -%}
+                <button id="returnBtn" class="modal-button return" onclick="window.location.href='/'">返回</button>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {%- if from_page != 'leaderboard' -%}
+    <script>
+        document.addEventListener('DOMContentLoaded', initNotice);
+    </script>
+    {%- endif -%}
+</body>
+</html>

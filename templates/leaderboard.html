@@ -23,6 +23,7 @@
                         <span id="last-updated-text">最后更新: 正在加载...</span>
                     </p>
                     <p class="last-updated">数据来源Suzuneko铃猫酱Bot</p>
+                    <button class="view-notice-btn" onclick="window.location.href='/notice'">查看使用声明</button>
                 </div>
             </div>
         </div>
@@ -118,6 +119,7 @@
     <div class="footer-info">
         <p>数据每1小时自动更新 | Rotaeno玩家排行榜 v1.5.2.1<br>Made by RTHsama | UI Designed by Sixi<br>Powered by Flask & PostgreSQL</p>
         <p>您共访问本网站{{ user_visits }}次 | 网页共被访问{{ total_visits }}次</p>
+        <p>当前有<span id="online-count">正在加载...</span>人正在访问</p>
         <p id="bilibili-link" class="related-link">
             B站个人主页：
             <a href="https://space.bilibili.com/436809171">

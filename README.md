@@ -36,6 +36,14 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 1.5.3
+
+新用户访问声明
+
+页脚增加当前正在访问的人数
+
+---
+
 v 1.5.2.1
 
 优化了网站访问计数逻辑
