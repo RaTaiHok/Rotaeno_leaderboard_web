@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>在线用户监控</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/monitor.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>实时在线用户监控</h1>
+            <button class="refresh-btn" onclick="refreshData()">刷新数据</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <h3>当前在线用户数</h3>
+                <p id="total-users">--</p>
+            </div>
+            <div class="stat-box">
+                <h3>移动设备用户</h3>
+                <p id="mobile-users">--</p>
+            </div>
+            <div class="stat-box">
+                <h3>桌面设备用户</h3>
+                <p id="desktop-users">--</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>IP 地址</th>
+                    <th>平台</th>
+                    <th>最后活跃时间</th>
+                    <th>用户代理(UA)</th>
+                </tr>
+            </thead>
+            <tbody id="users-table">
+                <tr>
+                    <td colspan="4" style="text-align: center;">加载中...</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p class="last-update">最后更新时间：<span id="last-update">--</span></p>
+    </div>
+
+    <script src="/static/monitor.js"></script>
+</body>
+</html>
