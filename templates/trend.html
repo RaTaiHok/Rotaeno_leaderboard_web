@@ -22,6 +22,9 @@
                     <p class="last-updated">
                         <span>最近七天数据统计分析（每日0-2点数据）</span>
                     </p>
+                    <p class="last-updated">
+                        <span style="color: #f5576c; font-weight: 600;">注意：仅统计 Rating > 2.000000 的玩家数据</span>
+                    </p>
                     <p class="last-updated">数据来源Suzuneko铃猫酱Bot</p>
                     <button class="view-notice-btn" onclick="window.location.href='/leaderboard/rating'">返回排行榜</button>
                 </div>
@@ -187,6 +190,10 @@
                         <div class="detail-item">
                             <span class="detail-label">数据表数量：</span>
                             <span class="detail-value" id="table-count">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">图表显示点：</span>
+                            <span class="detail-value" id="display-points">-</span>
                         </div>
                     </div>
                 </div>
