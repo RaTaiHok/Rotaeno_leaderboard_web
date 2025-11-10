@@ -1,6 +1,8 @@
 sqlmanage
 app copy.py
 .VSCodeCounter
+.vscode
+.data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

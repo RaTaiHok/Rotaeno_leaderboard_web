@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据趋势分析 - Rotaeno排行榜</title>
+    <link rel="shortcut icon" href="/static/img/app_icon.png" type="image/png">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dark.css">
+    <link rel="stylesheet" href="/static/trend.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>数据趋势分析 <span class="type-display">Trends</span></h1>
+                    <p class="last-updated">
+                        <span>最近七天数据统计分析（每日0-2点数据）</span>
+                    </p>
+                    <p class="last-updated">数据来源Suzuneko铃猫酱Bot</p>
+                    <button class="view-notice-btn" onclick="window.location.href='/leaderboard/rating'">返回排行榜</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <button id="backToTop">
+            <svg class="icon">
+                <use xlink:href="/static/icons.svg#icon-back-to-top"></use>
+            </svg>
+        </button>
+        <label for="theme-toggle" id="theme-change">
+            <svg class="icon" id="light">
+                <use xlink:href="/static/icons.svg#icon-light-theme"></use>
+            </svg>
+            <svg class="icon" id="dark">
+                <use xlink:href="/static/icons.svg#icon-dark-theme"></use>
+            </svg>
+        </label>
+        <input type="checkbox" id="theme-toggle" hidden>
+
+        <!-- 数据统计卡片 -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-content">
+                    <h3>Rating 平均值</h3>
+                    <p class="stat-value" id="avg-rating">-</p>
+                    <p class="stat-change" id="rating-change">计算中...</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <h3>Acc 平均值</h3>
+                    <p class="stat-value" id="avg-acc">-</p>
+                    <p class="stat-change" id="acc-change">计算中...</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <h3>Rating 中位数</h3>
+                    <p class="stat-value" id="median-rating">-</p>
+                    <p class="stat-label">最新数据</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <h3>Acc 中位数</h3>
+                    <p class="stat-value" id="median-acc">-</p>
+                    <p class="stat-label">最新数据</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 趋势图表 -->
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <h2>Rating 平均值趋势</h2>
+                    <p class="chart-description">最近七天玩家 Rating 平均值变化（每日选取0-2点数据）</p>
+                </div>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="ratingAvgChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <h2>Rating 中位数趋势</h2>
+                    <p class="chart-description">最近七天玩家 Rating 中位数变化（每日选取0-2点数据）</p>
+                </div>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="ratingMedianChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <h2>Acc 分数平均值趋势</h2>
+                    <p class="chart-description">最近七天玩家准度分数平均值变化（每日选取0-2点数据）</p>
+                </div>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="accAvgChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <h2>Acc 分数中位数趋势</h2>
+                    <p class="chart-description">最近七天玩家准度分数中位数变化（每日选取0-2点数据）</p>
+                </div>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="accMedianChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 详细统计数据 -->
+        <div class="detail-stats">
+            <div class="detail-header">
+                <h2>详细统计数据</h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-section">
+                    <h3>Rating 统计</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">最大值：</span>
+                            <span class="detail-value" id="max-rating">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">最小值：</span>
+                            <span class="detail-value" id="min-rating">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">标准差：</span>
+                            <span class="detail-value" id="std-rating">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">样本数：</span>
+                            <span class="detail-value" id="count-rating">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Acc 分数统计</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">最大值：</span>
+                            <span class="detail-value" id="max-acc">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">最小值：</span>
+                            <span class="detail-value" id="min-acc">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">标准差：</span>
+                            <span class="detail-value" id="std-acc">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">样本数：</span>
+                            <span class="detail-value" id="count-acc">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section full-width">
+                    <h3>数据时间范围</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">开始时间：</span>
+                            <span class="detail-value" id="start-date">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">结束时间：</span>
+                            <span class="detail-value" id="end-date">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">数据表数量：</span>
+                            <span class="detail-value" id="table-count">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <div class="loading-overlay active" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="/static/trend.js"></script>
+</body>
+
+</html>
