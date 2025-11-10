@@ -36,6 +36,12 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 1.5.5.2
+
+因分析较慢，所以添加了缓存机制
+
+---
+
 v 1.5.5.1
 
 优化趋势页面部分算法逻辑
