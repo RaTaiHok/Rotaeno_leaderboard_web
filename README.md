@@ -19,6 +19,7 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 - Rank
 - Player Name
 - Song Score
+- Flag
 - Rating 
 - Level
 - Played Time
@@ -35,6 +36,14 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 策划/UI设计： 思昔Sixi
 
 ## 更新日志
+
+v 1.5.6
+
+为单曲增加了Flag字段
+
+优化了单曲部分数据库结构（转为使用JSONB存储，也能应对以后Rotaeno越来越多的情况）
+
+---
 
 v 1.5.5.2
 
