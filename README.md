@@ -37,6 +37,12 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 1.5.7
+
+添加了并列排名显示的模式
+
+---
+
 v 1.5.6
 
 为单曲增加了Flag字段
