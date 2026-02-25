@@ -37,6 +37,12 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 1.5.9
+
+添加了更直观的排名变化情况和数值对比
+
+---
+
 v 1.5.8
 
 代码优化
