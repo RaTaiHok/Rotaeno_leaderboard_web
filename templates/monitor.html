@@ -1,52 +1,116 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <title>在线用户监控</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Monitor</title>
     <link rel="stylesheet" href="/static/monitor.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>实时在线用户监控</h1>
             <div>
-                <button class="refresh-btn" onclick="window.location.href='/compare'">玩家对比</button>
-                <button class="refresh-btn" onclick="refreshData()">刷新数据</button>
+                <h1>Admin Monitor</h1>
+                <p class="subtitle">在线用户、缓存状态、调度任务和手动运维操作</p>
             </div>
-        </div>
-        
-        <div class="stats">
-            <div class="stat-box">
-                <h3>当前在线用户数</h3>
-                <p id="total-users">--</p>
-            </div>
-            <div class="stat-box">
-                <h3>移动设备用户</h3>
-                <p id="mobile-users">--</p>
-            </div>
-            <div class="stat-box">
-                <h3>桌面设备用户</h3>
-                <p id="desktop-users">--</p>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="refreshAll()">刷新全部</button>
             </div>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>IP 地址</th>
-                    <th>平台</th>
-                    <th>最后活跃时间</th>
-                    <th>用户代理(UA)</th>
-                </tr>
-            </thead>
-            <tbody id="users-table">
-                <tr>
-                    <td colspan="4" style="text-align: center;">加载中...</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <p class="last-update">最后更新时间：<span id="last-update">--</span></p>
+        <section class="panel">
+            <h2>快捷操作</h2>
+            <div class="action-grid">
+                <button class="btn" data-action="refresh_info">刷新玩家信息</button>
+                <button class="btn" data-action="refresh_score">刷新玩家成绩</button>
+                <button class="btn" data-action="refresh_changes_cache">刷新变化缓存</button>
+                <button class="btn btn-danger" data-action="clear_trend_cache">清空趋势缓存</button>
+            </div>
+            <p id="action-status" class="muted">等待操作</p>
+        </section>
+
+        <section class="panel">
+            <h2>系统状态</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>调度器</h3>
+                    <p id="scheduler-running">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>任务数量</h3>
+                    <p id="scheduler-jobs">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>趋势缓存日期</h3>
+                    <p id="trend-cache-date">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>变化缓存更新时间</h3>
+                    <p id="changes-cache-updated">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>总访问量</h3>
+                    <p id="total-visits">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>活动线程</h3>
+                    <p id="active-threads">--</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <h3>调度任务</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>下次运行</th>
+                            <th>触发器</th>
+                            <th>最大并发</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobs-table">
+                        <tr><td colspan="4" class="center">加载中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>在线用户</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>当前在线</h3>
+                    <p id="total-users">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>移动端</h3>
+                    <p id="mobile-users">--</p>
+                </div>
+                <div class="stat-box">
+                    <h3>桌面端</h3>
+                    <p id="desktop-users">--</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IP</th>
+                            <th>平台</th>
+                            <th>最后活跃</th>
+                            <th>User-Agent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table">
+                        <tr><td colspan="4" class="center">加载中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="last-update">最后刷新时间: <span id="last-update">--</span></p>
+        </section>
     </div>
 
     <script src="/static/monitor.js"></script>
