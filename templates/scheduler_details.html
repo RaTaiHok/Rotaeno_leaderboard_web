@@ -38,11 +38,16 @@
     <script>
         async function loadSchedulerDetails() {
             try {
-                const response = await fetch('/api/scheduler/details');
+                const response = await fetch('/api/scheduler/details', { credentials: 'same-origin' });
                 const data = await response.json();
 
                 const tbody = document.querySelector('#scheduler-table tbody');
                 tbody.innerHTML = '';
+
+                if (!response.ok || data.status !== 'success') {
+                    tbody.innerHTML = `<tr><td colspan="9">Error: ${data.message || response.statusText}</td></tr>`;
+                    return;
+                }
 
                 if (data.status === 'success' && data.jobs.length > 0) {
                     data.jobs.forEach(job => {

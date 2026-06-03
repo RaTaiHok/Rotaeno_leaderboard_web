@@ -36,6 +36,13 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 策划/UI设计： 思昔Sixi
 
 ## 更新日志
+
+v 1.7.0
+
+优化代码结构，rating算法至最新
+
+---
+
 v 1.6.0
 
 增加下载数据功能
