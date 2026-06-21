@@ -14,6 +14,16 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 - Played Time
 - Server
 
+> Completion
+
+- Rank
+- Player Name
+- Level
+- Completion Progress
+- Completion
+- Played Time
+- Server
+
 > Song Score
 
 - Rank
@@ -36,6 +46,14 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 策划/UI设计： 思昔Sixi
 
 ## 更新日志
+
+v 2.0.0
+
+添加```完成度```排行
+
+优化代码
+
+---
 
 v 1.7.0
 
