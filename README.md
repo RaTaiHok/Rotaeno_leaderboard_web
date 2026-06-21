@@ -47,6 +47,14 @@ A leaderboard web for rotaeno bot-Suzuneko by Flask
 
 ## 更新日志
 
+v 2.1.0
+
+为```完成度```添加变化可视化
+
+修复数据更新scheduler的bug
+
+---
+
 v 2.0.0
 
 添加```完成度```排行
