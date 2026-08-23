@@ -1,0 +1,15 @@
+# Build
+bin/
+*.exe
+*.test
+
+# Runtime data
+data/visit_counts.json
+data/scheduler_state.json
+data/xlsx_cache/
+
+# Env / IDE
+.env
+.vscode/
+.idea/
+/docs
